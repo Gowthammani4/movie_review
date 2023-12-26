@@ -4,6 +4,6 @@ RUN mvn clean package -DskipTests
 
 
 FROM openjdk:21
-COPY --from=build /target/moviereview_app.jar moviereview_app.jar
+COPY --from=build/target/moviereview_app.jar moviereview_app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","moviereview_app.jar"]
