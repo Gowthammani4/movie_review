@@ -1,9 +1,8 @@
-FROM maven:4.0.0-eclipse-temurin-21-alpine AS build
+FROM maven:3.8.5-openjdk-21 AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
-
-FROM openjdk:21
-COPY --from=build /target/moviereview_app.jar moviereview_app.jar
+FROM openjdk:17.0.1-jdk-slim
+COPY --from=build /target/demo-0.0.1-SNAPSHOT.jar demo.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","moviereview_app.jar"]
+ENTRYPOINT ["java","-jar","demo.jar"]
