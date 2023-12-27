@@ -1,5 +1,5 @@
 # Set the base image
-FROM maven:4.0.0-openjdk-21-slim
+FROM maven:3.9.6-eclipse-temurin-21-jammy
 
 # Set the working directory
 WORKDIR /app
