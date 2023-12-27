@@ -12,7 +12,7 @@ COPY src /app/src
 RUN mvn package -DskipTests
 
 # Copy the JAR file to the working directory
-COPY target/Movie-API-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY /app/target/Movie-API-0.0.1-SNAPSHOT.jar /app/app.jar
 
 # Expose the application port
 EXPOSE 8080
