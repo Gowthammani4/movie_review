@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 
 public interface ReviewRepository extends MongoRepository<Review, ObjectId> {
+    void deleteReviewByUserId(String userId);
 }
