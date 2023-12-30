@@ -10,6 +10,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ReviewService {
     @Autowired
@@ -26,9 +28,12 @@ public class ReviewService {
         return review;
     }
     public void deleteReview(String userId){
-reviewRepo.deleteReviewByUserId(userId);
-        Query q=new Query(Criteria.where("userId").is(userId));
-        Update update=new Update().pull("reviewIds",userId);
+        Review review1= reviewRepo.findByUserId(userId);
+        System.out.println(review1);
+        System.out.println(review1.getId());
+        reviewRepo.deleteReviewByUserId(userId);
+        Query q=new Query(Criteria.where("Id").is(review1.getId()));
+        Update update=new Update().pull("reviewIds",review1.getId());
         mongoTemplate.updateFirst(q,update,Movie.class);
     }
 }
