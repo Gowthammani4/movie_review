@@ -1,13 +1,17 @@
 package com.moviereview.Movie.API.repository;
 
 import com.moviereview.Movie.API.model.Movie;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 @Repository
+
 public interface movieRepository extends MongoRepository<Movie,ObjectId> {
-    Optional<Movie> findMovieByImdbId(String imdbId);
-    Optional<Movie> findMovieByReleaseDate(String releaseDate);
+    Movie findMovieByImdbId(String imdbId);
+    Movie findMovieByReleaseDate(String releaseDate);
+
 }
