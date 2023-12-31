@@ -25,7 +25,7 @@ private List<Movie> allMovies(){
 //}
 @GetMapping("/{imdbId}")
     @ResponseStatus(HttpStatus.OK)
-    private ResponseEntity<Optional<Movie>> getMovieById(@PathVariable String imdbId){
-    return new ResponseEntity<Optional<Movie>>(movieservice.getMovieByImdbId(imdbId),HttpStatus.OK);
+    private ResponseEntity<Movie> getMovieById(@PathVariable String imdbId){
+    return new ResponseEntity<Movie>(movieservice.getMovieByImdbId(imdbId),HttpStatus.OK);
 }
 }

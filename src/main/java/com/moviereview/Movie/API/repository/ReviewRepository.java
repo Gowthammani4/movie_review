@@ -12,5 +12,5 @@ import java.util.Optional;
 
 public interface ReviewRepository extends MongoRepository<Review, ObjectId> {
     void deleteReviewByUserId(String userId);
-    Review findByUserId(String userId);
+    Review findByUserIdAndImdbId(String userId,String imdbId);
 }

@@ -17,9 +17,9 @@ public class ReviewController {
     public ResponseEntity<Review> createReview(@RequestBody Map<String,String> payload){
         return new ResponseEntity<Review>(reviewService.createReview(payload.get("reviewBody"),payload.get("imdbId"), payload.get("userId")), HttpStatus.CREATED);
     }
-    @DeleteMapping("/delete/{userId}")
-    public void deleteReview(@PathVariable String userId){
-        reviewService.deleteReview(userId);
+    @DeleteMapping("/delete/{imdbId}/{userId}")
+    public void deleteReview(@PathVariable String userId,@PathVariable String imdbId){
+        reviewService.deleteReview(userId,imdbId);
         System.out.println(userId+" deleted successfully");
     }
 }

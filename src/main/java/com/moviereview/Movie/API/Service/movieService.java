@@ -18,9 +18,10 @@ public class movieService {
     public List<Movie> getAllMovies(){
         System.out.println("In service");
         System.out.println(movieRepo.findAll());
+
         return movieRepo.findAll();
     }
-    public Optional<Movie> getMovieByImdbId(String imdbId){
+    public Movie getMovieByImdbId(String imdbId){
        return movieRepo.findMovieByImdbId(imdbId);
     }
 }

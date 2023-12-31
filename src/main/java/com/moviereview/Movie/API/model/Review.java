@@ -18,8 +18,9 @@ public class Review {
     private ObjectId id;
     private String body;
     private String userId;
+    private String imdbId;
 
 
-    public Review(String body,String user){this.body=body;this.userId=user;}
+    public Review(String body,String user,String imdbId){this.body=body;this.userId=user;this.imdbId=imdbId;}
 
 }
