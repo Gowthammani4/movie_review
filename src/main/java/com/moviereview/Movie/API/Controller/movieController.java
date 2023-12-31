@@ -20,9 +20,7 @@ public class movieController {
 private List<Movie> allMovies(){
     return movieservice.getAllMovies();
 }
-//    private ResponseEntity<List<Movie>> allMovies(){
-//    return new ResponseEntity<List<Movie>>(movieservice.getAllMovies(),HttpStatus.OK);
-//}
+
 @GetMapping("/{imdbId}")
     @ResponseStatus(HttpStatus.OK)
     private ResponseEntity<Movie> getMovieById(@PathVariable String imdbId){
