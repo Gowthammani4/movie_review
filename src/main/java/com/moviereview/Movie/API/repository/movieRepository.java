@@ -1,8 +1,6 @@
 package com.moviereview.Movie.API.repository;
 
 import com.moviereview.Movie.API.model.Movie;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
