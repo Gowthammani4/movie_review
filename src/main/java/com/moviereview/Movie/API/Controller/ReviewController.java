@@ -1,6 +1,7 @@
 package com.moviereview.Movie.API.Controller;
 import java.util.*;
 import com.moviereview.Movie.API.Service.ReviewService;
+import com.moviereview.Movie.API.model.Movie;
 import com.moviereview.Movie.API.model.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,4 +23,10 @@ public class ReviewController {
         reviewService.deleteReview(userId,imdbId);
         System.out.println(userId+" deleted successfully");
     }
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    private List<Review> allMovies(){
+        return reviewService.allReviews();
+    }
+
 }

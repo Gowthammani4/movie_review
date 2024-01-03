@@ -47,4 +47,7 @@ public class ReviewService {
         movieRepo.save(movies);
         reviewRepo.deleteReviewByUserId(userId);
     }
+    public List<Review> allReviews(){
+        return reviewRepo.findAll();
+    }
 }
