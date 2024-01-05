@@ -21,6 +21,12 @@ private List<Movie> allMovies(){
     return movieservice.getAllMovies();
 }
 
+@GetMapping("/{releaseDate}")
+@ResponseStatus(HttpStatus.OK)
+private List<Movie> getMoviesByReleaseDate(@PathVariable String releaseDate){
+    return movieservice.filterByReleaseDate(releaseDate);
+}
+
 @GetMapping("/{imdbId}")
     @ResponseStatus(HttpStatus.OK)
     private ResponseEntity<Movie> getMovieById(@PathVariable String imdbId){
