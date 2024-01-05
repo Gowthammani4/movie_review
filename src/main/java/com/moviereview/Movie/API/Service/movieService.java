@@ -20,7 +20,6 @@ public class movieService {
     }
     public List<Movie> filterByGenres(String genre){
         List<Movie> allMovies=movieRepo.findAll();
-
         allMovies.removeIf(i -> !i.getGenres().contains(genre));
         return allMovies;
     }
