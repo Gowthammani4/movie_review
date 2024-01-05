@@ -18,6 +18,11 @@ public class movieService {
         allMovies.removeIf(i -> !i.getReleaseDate().equals(releaseDate));
         return allMovies;
     }
+    public List<Movie> filterByGenres(String genre){
+        List<Movie> allMovies=movieRepo.findAll();
+        allMovies.removeIf(i -> !i.getGenres().contains(genre));
+        return allMovies;
+    }
 
 
     public List<Movie> getAllMovies(){
