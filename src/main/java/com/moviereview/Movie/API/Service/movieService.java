@@ -13,6 +13,12 @@ public class movieService {
     @Autowired
     private movieRepository movieRepo;
 
+    public List<Movie> filterByReleaseDate(String releaseDate){
+        List<Movie> allMovies=movieRepo.findAll();
+        allMovies.removeIf(i -> !i.getImdbId().equals(releaseDate));
+        return allMovies;
+    }
+
 
     public List<Movie> getAllMovies(){
         System.out.println("In service");
