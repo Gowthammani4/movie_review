@@ -15,13 +15,12 @@ public class movieService {
 
     public List<Movie> filterByReleaseDate(String releaseDate){
         List<Movie> allMovies=movieRepo.findAll();
-        allMovies.removeIf(i -> !i.getImdbId().equals(releaseDate));
+        allMovies.removeIf(i -> !i.getReleaseDate().equals(releaseDate));
         return allMovies;
     }
 
 
     public List<Movie> getAllMovies(){
-        System.out.println("In service");
         System.out.println(movieRepo.findAll());
 
         return movieRepo.findAll();
