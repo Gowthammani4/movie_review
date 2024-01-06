@@ -29,4 +29,10 @@ public class ReviewController {
         return reviewService.allReviews();
     }
 
+    @GetMapping("/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    private List<Review> filterReviewsByUserId(@PathVariable String userId){
+        return reviewService.filterByUserId(userId);
+    }
+
 }
