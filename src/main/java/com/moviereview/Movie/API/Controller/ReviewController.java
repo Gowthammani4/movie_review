@@ -15,8 +15,8 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping
-    public ResponseEntity<Review> createReview(@RequestBody Map<String,String> payload){
-        return new ResponseEntity<Review>(reviewService.createReview(payload.get("reviewBody"),payload.get("imdbId"), payload.get("userId")), HttpStatus.CREATED);
+    public Review createReview(@RequestBody Map<String,String> payload){
+        return reviewService.createReview(payload.get("reviewBody"),payload.get("imdbId"), payload.get("userId"));
     }
     @DeleteMapping("/delete/{imdbId}/{userId}")
     public void deleteReview(@PathVariable String userId,@PathVariable String imdbId){
