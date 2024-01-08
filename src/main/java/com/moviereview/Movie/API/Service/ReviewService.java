@@ -50,9 +50,11 @@ public class ReviewService {
     public List<Review> allReviews(){
         return reviewRepo.findAll();
     }
+    
 
     public List<Review> filterByUserId(String userId){
         List<Review> allReviews=reviewRepo.findAll();
+        System.out.println("")
         allReviews.removeIf(i -> !i.getUserId().equals(userId));
         return allReviews;
     }
