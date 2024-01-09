@@ -15,9 +15,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "UserDetails")
 public class UserDetails {
     @Id
-    private ObjectId id;
+    private String id;
+    private String confirmationToken=null;
     private String userName;
     private String email;
     private String password;
-    UserDetails(String email,String password){this.email=email;this.password=password;};
+    public UserDetails(String userName, String email, String password){this.userName=userName;this.email=email;this.password=password;};
 }
