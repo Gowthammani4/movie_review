@@ -20,18 +20,25 @@ public class UserService {
         if(userRepository.existsByEmail(userDetails.getEmail())){
             return;}
         UserDetails newData =new UserDetails(userDetails.getUserName(),userDetails.getEmail(),userDetails.getPassword());
-        newData.setConfirmationToken(newData.getId());
         userRepository.save(newData);
-        userDetails.setConfirmationToken(userDetails.getId());
+        System.out.println(newData);
         SimpleMailMessage mailMessage=new SimpleMailMessage();
         mailMessage.setTo(userDetails.getEmail());
         mailMessage.setSubject("Complete Registration!");
         mailMessage.setText("To confirm your account, please click here : "
-                +"http://localhost:8085/confirm-account?token="+userDetails.getId());
+                +"http://localhost:9090/user/confirm-account?token="+newData.getUserName());
         emailService.sendMail(mailMessage);
 
-        System.out.println("Confirmation Token: " + userDetails.getId());
+        System.out.println("Confirmation Token: " + newData.getUserName());
 
 
+    }
+
+    public String confirmEmail(String userName){
+        if(userName==null){
+            userRepository.deleteByUserName(userName);
+
+        }
+        return "Email verified successfully!";
     }
 }
