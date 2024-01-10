@@ -3,10 +3,7 @@ package com.moviereview.Movie.API.Controller;
 import com.moviereview.Movie.API.Service.UserService;
 import com.moviereview.Movie.API.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -18,4 +15,8 @@ public class userController {
     userService.saveUser(user);
     return "registered";
 }
+@RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
+public String confirmUserAccount(@RequestParam("token")String confirmationToken) {
+        return userService.confirmEmail(confirmationToken);
+    }
 }
