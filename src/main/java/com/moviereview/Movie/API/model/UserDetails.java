@@ -20,5 +20,6 @@ public class UserDetails {
     private String email;
     private String password;
     private Boolean verified;
-    public UserDetails(String userName, String email, String password,Boolean verified){this.userName=userName;this.email=email;this.password=password;this.verified=verified;};
+    private long confirmationToken;
+    public UserDetails(String userName, String email, String password,Boolean verified,long token){this.userName=userName;this.email=email;this.password=password;this.verified=verified;this.confirmationToken=token;};
 }
