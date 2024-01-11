@@ -9,7 +9,7 @@ COPY pom.xml /app/pom.xml
 COPY src /app/src
 
 # Build the project
-RUN mvn package -DskipTests
+
 
 # Copy the JAR file to the working directory
 COPY target/Movie-API-0.0.1-SNAPSHOT.jar /app/app.jar
