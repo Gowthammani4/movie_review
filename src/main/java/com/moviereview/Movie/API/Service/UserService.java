@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -32,6 +34,13 @@ public class UserService {
         System.out.println("Confirmation Token: " + newData.getUserName());
 
 
+    }
+    public String loginUser(String email,String password){
+        UserDetails userDetails=userRepository.findByEmailIgnoreCase(email);
+        if(!userDetails.getPassword().equals(password)){
+            return null;
+        }
+        return "success";
     }
 
     public String confirmEmail(String userName){
