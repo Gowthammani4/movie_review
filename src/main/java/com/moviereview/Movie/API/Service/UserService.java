@@ -51,4 +51,22 @@ public class UserService {
         userRepository.save(user);
         return "Email verified successfully!";
     }
+    public String forgotPassword(String email){
+        UserDetails user=userRepository.findByEmailIgnoreCase(email);
+        if(user==null)
+            return null;
+
+        SimpleMailMessage mailMessage=new SimpleMailMessage();
+        mailMessage.setTo(user.getEmail());
+        mailMessage.setSubject("Forgot Password!");
+        mailMessage.setText("To show your account's password, please click here : "
+                +"http://localhost:9090/user/show-Password?yourPassword="+user.getPassword());
+        emailService.sendMail(mailMessage);
+        return "sent to email!";
+
+    }
+
+    public String PasswordShow(String password){
+        return "Your password is : "+password;
+    }
 }
