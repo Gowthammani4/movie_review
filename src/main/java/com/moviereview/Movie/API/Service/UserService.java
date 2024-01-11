@@ -21,7 +21,7 @@ public class UserService {
     public void saveUser(UserDetails userDetails){
         if(userRepository.existsByEmail(userDetails.getEmail())){
             return;}
-        UserDetails newData =new UserDetails(userDetails.getUserName(),userDetails.getEmail(),userDetails.getPassword());
+        UserDetails newData =new UserDetails(userDetails.getUserName(),userDetails.getEmail(),userDetails.getPassword(),false);
         userRepository.save(newData);
         System.out.println(newData);
         SimpleMailMessage mailMessage=new SimpleMailMessage();
@@ -30,10 +30,6 @@ public class UserService {
         mailMessage.setText("To confirm your account, please click here : "
                 +"http://localhost:9090/user/confirm-account?token="+newData.getUserName());
         emailService.sendMail(mailMessage);
-
-        System.out.println("Confirmation Token: " + newData.getUserName());
-
-
     }
     public String loginUser(String email,String password){
         UserDetails userDetails=userRepository.findByEmailIgnoreCase(email);
@@ -46,8 +42,10 @@ public class UserService {
     public String confirmEmail(String userName){
         if(userName==null){
             userRepository.deleteByUserName(userName);
-
         }
+        UserDetails user=userRepository.findByUserNameIgnoreCase(userName);
+        user.setVerified(true);
+        userRepository.save(user);
         return "Email verified successfully!";
     }
 }
