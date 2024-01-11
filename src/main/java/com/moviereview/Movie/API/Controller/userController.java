@@ -23,7 +23,15 @@ public class userController {
 }
 @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
 public String confirmUserAccount(@RequestParam("token")String confirmationToken) {
-    return userService.confirmEmail(confirmationToken);
+    return userService.confirmEmail(Long.parseLong(confirmationToken));
+}
+@PostMapping("/forgotPassword/{email}")
+public String forgetPassword(@PathVariable String email){
+    return userService.forgotPassword(email);
+}
+@RequestMapping(value="/show-Password", method= {RequestMethod.GET, RequestMethod.POST})
+public String showPassword(@RequestParam("yourPassword")String password) {
+    return userService.PasswordShow(password);
 }
 @GetMapping("/login")
 public List<Movie> loginUser(@RequestBody Map<String,String> user){
