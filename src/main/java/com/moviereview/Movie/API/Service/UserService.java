@@ -31,7 +31,7 @@ public class UserService {
         mailMessage.setTo(userDetails.getEmail());
         mailMessage.setSubject("Complete Registration!");
         mailMessage.setText("To confirm your account, please click here : "
-                +"http://localhost:9090/user/confirm-account?token="+newData.getConfirmationToken());
+                +"https://movie-review-3gg6.onrender.com/user/confirm-account?token="+newData.getConfirmationToken());
         emailService.sendMail(mailMessage);
     }
     public String loginUser(String email,String password){
@@ -60,7 +60,7 @@ public class UserService {
         mailMessage.setTo(user.getEmail());
         mailMessage.setSubject("Forgot Password!");
         mailMessage.setText("To show your account's password, please click here : "
-                +"http://localhost:9090/user/show-Password?yourPassword="+user.getPassword());
+                +"https://movie-review-3gg6.onrender.com/user/show-Password?yourPassword="+user.getPassword());
         emailService.sendMail(mailMessage);
         return "sent to email!";
 
