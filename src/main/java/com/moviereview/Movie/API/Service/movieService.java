@@ -26,8 +26,6 @@ public class movieService {
 
 
     public List<Movie> getAllMovies(){
-        System.out.println(movieRepo.findAll());
-
         return movieRepo.findAll();
     }
     public Movie getMovieByImdbId(String imdbId){

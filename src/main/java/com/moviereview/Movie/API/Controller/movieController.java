@@ -17,7 +17,7 @@ public class movieController {
     private movieService movieservice;
 @GetMapping
 @ResponseStatus(HttpStatus.OK)
-private List<Movie> allMovies(){
+public List<Movie> allMovies(){
     return movieservice.getAllMovies();
 }
 
