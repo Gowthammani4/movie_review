@@ -23,6 +23,8 @@ public class UserService {
     public void saveUser(UserDetails userDetails){
         if(userRepository.existsByEmail(userDetails.getEmail())){
             return;}
+        if(userRepository.existsByUserName(userDetails.getUserName()))
+            return;
         Random random=new Random();
         long token=random.nextLong();
         UserDetails newData =new UserDetails(userDetails.getUserName(),userDetails.getEmail(),userDetails.getPassword(),false,token);
@@ -41,6 +43,7 @@ public class UserService {
         if(!userDetails.getPassword().equals(password) || !userDetails.getVerified()){
             return null;
         }
+
         return "success";
     }
 

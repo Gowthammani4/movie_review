@@ -12,6 +12,7 @@ public interface UserRepository extends MongoRepository<UserDetails, ObjectId> {
 UserDetails findByEmailIgnoreCase(String email);
 UserDetails findById(String Id);
 Boolean existsByEmail(String email);
+Boolean existsByUserName(String userName);
 void deleteByUserName(String userName);
 UserDetails findByUserNameIgnoreCase(String userName);
 UserDetails findByConfirmationToken(long token);
