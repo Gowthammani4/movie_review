@@ -2,14 +2,10 @@ package com.moviereview.Movie.API.Service;
 
 import com.moviereview.Movie.API.model.UserDetails;
 import com.moviereview.Movie.API.repository.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -40,7 +36,7 @@ public class UserService {
         UserDetails userDetails=userRepository.findByEmailIgnoreCase(email);
         if (userDetails==null)
             return null;
-        if(!userDetails.getPassword().equals(password) || !userDetails.getVerified()){
+        if(!userDetails.getPassword().equals(password) && !userDetails.getVerified()){
             return null;
         }
 
