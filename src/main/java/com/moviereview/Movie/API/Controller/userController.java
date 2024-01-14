@@ -41,5 +41,9 @@ public List<Movie> loginUser(@RequestBody Map<String,String> user){
     else
         return movieCont.allMovies();
 }
+@PostMapping("/newPassword/{")
+    public String newPassword(@RequestBody Map<String,String> userCredentials){
+    return userService.passwordChange(userCredentials.get("email"),userCredentials.get("newPassword"));
+}
 
 }
