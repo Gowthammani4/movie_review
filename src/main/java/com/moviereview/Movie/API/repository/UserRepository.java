@@ -15,6 +15,7 @@ Boolean existsByEmail(String email);
 Boolean existsByUserName(String userName);
 void deleteByUserName(String userName);
 UserDetails findByUserNameIgnoreCase(String userName);
+UserDetails deleteByEmail(String email);
 UserDetails findByConfirmationToken(long token);
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -62,6 +63,15 @@ public class UserService {
                 +"https://movie-review-3gg6.onrender.com/user/show-Password?yourPassword="+user.getPassword());
         emailService.sendMail(mailMessage);
         return "sent to email!";
+
+    }
+
+    public String passwordChange(String email,String newPassword){
+        UserDetails user=userRepository.findByEmailIgnoreCase(email);
+        userRepository.deleteByEmail(email);
+        user.setPassword(newPassword);
+        userRepository.save(user);
+        return "Password Changed!";
 
     }
 
