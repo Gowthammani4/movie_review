@@ -21,19 +21,19 @@ public List<Movie> allMovies(){
     return movieservice.getAllMovies();
 }
 
-@GetMapping("/filter/{releaseDate}")
+@PostMapping("/filter/{releaseDate}")
 @ResponseStatus(HttpStatus.OK)
 private List<Movie> getMoviesByReleaseDate(@PathVariable String releaseDate){
     return movieservice.filterByReleaseDate(releaseDate);
 }
 
-@GetMapping("/filterGenre/{genre}")
+@PostMapping("/filterGenre/{genre}")
 @ResponseStatus(HttpStatus.OK)
 private List<Movie> getMoviesByGenres(@PathVariable String genre){
     return movieservice.filterByGenres(genre);
 }
 
-@GetMapping("/{imdbId}")
+@PostMapping("/{imdbId}")
     @ResponseStatus(HttpStatus.OK)
     private ResponseEntity<Movie> getMovieById(@PathVariable String imdbId){
     return new ResponseEntity<Movie>(movieservice.getMovieByImdbId(imdbId),HttpStatus.OK);

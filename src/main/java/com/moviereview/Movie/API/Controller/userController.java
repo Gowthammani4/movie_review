@@ -33,7 +33,7 @@ public String forgetPassword(@PathVariable String email){
 public String showPassword(@RequestParam("yourPassword")String password) {
     return userService.PasswordShow(password);
 }
-@GetMapping("/login")
+@PostMapping("/login")
 public List<Movie> loginUser(@RequestBody Map<String,String> user){
     String state=userService.loginUser(user.get("email"),user.get("password"));
     if(state==null)
