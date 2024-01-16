@@ -12,8 +12,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/user")
 public class userController {
-    @Autowired
-    private movieController movieCont;
 @Autowired
     private UserService userService;
 @PostMapping("/register")
@@ -34,12 +32,9 @@ public String showPassword(@RequestParam("yourPassword")String password) {
     return userService.PasswordShow(password);
 }
 @PostMapping("/login")
-public List<Movie> loginUser(@RequestBody Map<String,String> user){
+public String loginUser(@RequestBody Map<String,String> user){
     String state=userService.loginUser(user.get("email"),user.get("password"));
-    if(state==null)
-        return null;
-    else
-        return movieCont.allMovies();
+    return "Success";
 }
 @PostMapping("/newPassword")
     public String newPassword(@RequestBody Map<String,String> userCredentials){
