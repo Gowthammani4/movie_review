@@ -49,7 +49,7 @@ public class UserService {
         userRepository.delete(user);
         user.setVerified(true);
         userRepository.save(user);
-        return "Email verified successfully!";
+        return "Success";
     }
     public String forgotPassword(String email){
         UserDetails user=userRepository.findByEmailIgnoreCase(email);
