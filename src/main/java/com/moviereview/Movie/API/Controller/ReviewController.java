@@ -25,7 +25,7 @@ public class ReviewController {
     }
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    private List<Review> allMovies(){
+    private List<Review> allReviews(){
         return reviewService.allReviews();
     }
     @PostMapping("findByImdbId/{imdbId}")
