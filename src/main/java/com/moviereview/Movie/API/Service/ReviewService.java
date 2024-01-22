@@ -31,6 +31,9 @@ public class ReviewService {
                 ).first();
         return review;
     }
+    public List<Review> findByImdbId(String imdbId){
+        return reviewRepo.findByImdbId(imdbId);
+    }
     public void deleteReview(String userId,String imdbId){
         Review review1= reviewRepo.findByUserIdAndImdbId(userId,imdbId);
         Movie movies=movieRepo.findMovieByImdbId(imdbId);
