@@ -28,6 +28,13 @@ public class ReviewController {
     private List<Review> allMovies(){
         return reviewService.allReviews();
     }
+    @PostMapping("findImdbId/{imdbId}")
+    @ResponseStatus(HttpStatus.OK)
+    private List<Review> findByImdbId(@PathVariable String imdbId){
+        return reviewService.findByImdbId(imdbId);
+    }
+
+
 
     @PostMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
