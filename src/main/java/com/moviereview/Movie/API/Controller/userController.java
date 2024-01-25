@@ -1,6 +1,7 @@
 package com.moviereview.Movie.API.Controller;
 
 import com.moviereview.Movie.API.Service.UserService;
+import com.moviereview.Movie.API.Service.currentUserService;
 import com.moviereview.Movie.API.model.Movie;
 import com.moviereview.Movie.API.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import java.util.Map;
 public class userController {
 @Autowired
     private UserService userService;
+@Autowired
+private currentUserService currUserService;
 @PostMapping("/register")
     private String registerUser(@RequestBody UserDetails user){
     userService.saveUser(user);
@@ -34,6 +37,7 @@ public String showPassword(@RequestParam("yourPassword")String password) {
 @PostMapping("/login")
 public String loginUser(@RequestBody Map<String,String> user){
     String state=userService.loginUser(user.get("email"),user.get("password"));
+    currUserService.addUser(user.get("email"));
     return "Success";
 }
 @PostMapping("/newPassword")
