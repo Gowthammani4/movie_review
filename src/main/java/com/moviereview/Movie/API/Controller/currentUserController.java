@@ -1,6 +1,7 @@
 package com.moviereview.Movie.API.Controller;
 
 import com.moviereview.Movie.API.Service.currentUserService;
+import com.moviereview.Movie.API.model.currentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ public class currentUserController {
     private currentUserService curruserService;
 
     @GetMapping
-    private String getCurrentUser(){
+    private currentUser getCurrentUser(){
         return curruserService.getCurrentUser();
     }
 }
