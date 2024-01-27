@@ -1,6 +1,8 @@
 package com.moviereview.Movie.API.Service;
 
+import com.moviereview.Movie.API.model.UserDetails;
 import com.moviereview.Movie.API.model.currentUser;
+import com.moviereview.Movie.API.repository.UserRepository;
 import com.moviereview.Movie.API.repository.currentUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,17 +13,23 @@ import java.util.List;
 public class currentUserService {
     @Autowired
     private currentUserRepository currentUserRepo;
-    public String addUser(String email){
+    @Autowired
+    private UserRepository userRepo;
+    public currentUser addUser(String email){
+        UserDetails user=userRepo.findByEmailIgnoreCase(email);
+        currentUser newUser= new currentUser(email,user.getUserName());
+
         List<currentUser> users=currentUserRepo.findAll();
         if(users.isEmpty())
-            currentUserRepo.save(new currentUser(email));
+            currentUserRepo.save(newUser);
         else{
             currentUserRepo.deleteAll();
-            currentUserRepo.save(new currentUser(email));}
-        return email;
+            currentUserRepo.save(newUser);
+        }
+        return newUser;
     }
-    public String getCurrentUser(){
+    public currentUser getCurrentUser(){
         List<currentUser> user=currentUserRepo.findAll();
-        return user.getFirst().getEmail();
+        return user.getFirst();
     }
 }

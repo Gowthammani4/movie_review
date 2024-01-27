@@ -15,14 +15,18 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping
-    public Review createReview(@RequestBody Map<String,String> review){
-        return reviewService.createReview(review.get("reviewBody"),review.get("imdbId"), review.get("userId"));
+    public String createReview(@RequestBody Map<String,String> review){
+         reviewService.createReview(review.get("reviewBody"),review.get("imdbId"));
+    return "Success";
     }
     @DeleteMapping("/delete/{imdbId}/{userId}")
     public void deleteReview(@PathVariable String userId,@PathVariable String imdbId){
         reviewService.deleteReview(userId,imdbId);
         System.out.println(userId+" deleted successfully");
     }
+    @GetMapping("/userReviews")
+    @ResponseStatus(HttpStatus.OK)
+    private List<Review> currentUserReviews(){return reviewService.findReviewsByCurrentUserId();}
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     private List<Review> allReviews(){

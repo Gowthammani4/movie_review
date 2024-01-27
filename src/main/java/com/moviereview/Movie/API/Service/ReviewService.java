@@ -2,7 +2,9 @@ package com.moviereview.Movie.API.Service;
 
 import com.moviereview.Movie.API.model.Movie;
 import com.moviereview.Movie.API.model.Review;
+import com.moviereview.Movie.API.model.currentUser;
 import com.moviereview.Movie.API.repository.ReviewRepository;
+import com.moviereview.Movie.API.repository.currentUserRepository;
 import com.moviereview.Movie.API.repository.movieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -22,9 +24,13 @@ public class ReviewService {
 
     @Autowired
     private movieRepository movieRepo;
+    @Autowired
+    private currentUserService currService;
 
-    public Review createReview(String reviewBody,String imdbId,String user) {
-        Review review = reviewRepo.insert(new Review(reviewBody,user,imdbId));
+
+    public Review createReview(String reviewBody,String imdbId) {
+        currentUser currentuser=currService.getCurrentUser();
+        Review review = reviewRepo.insert(new Review(reviewBody,currentuser.getUserId(),imdbId));
         mongoTemplate.update(Movie.class)
                 .matching(Criteria.where("imdbId").is(imdbId))
                 .apply(new Update().push("reviewIds").value(review)
@@ -34,13 +40,22 @@ public class ReviewService {
     public List<Review> findByImdbId(String imdbId){
         return reviewRepo.findByImdbId(imdbId);
     }
+
+    public List<Review> findReviewsByCurrentUserId(){
+        currentUser currentuser=currService.getCurrentUser();
+        return reviewRepo.findByUserId(currentuser.getUserId());
+
+    }
     public void deleteReview(String userId,String imdbId){
+        currentUser user=currService.getCurrentUser();
         Review review1= reviewRepo.findByUserIdAndImdbId(userId,imdbId);
         Movie movies=movieRepo.findMovieByImdbId(imdbId);
 
         List<Review> reviewIds=movies.getReviewIds();
         List<Review> newIds=new ArrayList<>();
         for (Review reviewId : reviewIds) {
+            if (!(reviewId.getUserId().equals(user.getUserId())))
+                return;
             if (reviewId.getId().equals(review1.getId())) {
                 continue;
             }
