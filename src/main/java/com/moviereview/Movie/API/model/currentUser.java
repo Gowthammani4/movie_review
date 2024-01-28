@@ -16,9 +16,10 @@ public class currentUser {
     @Id
     private String id;
     private String email;
-    String userId;
-    
-    public currentUser(String email,String userName){
+    private String userId;
+
+
+    public currentUser(String email, String userName){
         this.email=email;
         this.userId=userName;
     }
