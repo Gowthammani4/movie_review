@@ -46,9 +46,9 @@ public class ReviewService {
         return reviewRepo.findByUserId(currentuser.getUserId());
 
     }
-    public void deleteReview(String userId,String imdbId){
+    public void deleteReview(String imdbId){
         currentUser user=currService.getCurrentUser();
-        Review review1= reviewRepo.findByUserIdAndImdbId(userId,imdbId);
+        Review review1= reviewRepo.findByUserIdAndImdbId(user.getUserId(),imdbId);
         Movie movies=movieRepo.findMovieByImdbId(imdbId);
 
         List<Review> reviewIds=movies.getReviewIds();
@@ -63,7 +63,7 @@ public class ReviewService {
         }
         movies.setReviewIds(newIds);
         movieRepo.save(movies);
-        reviewRepo.deleteReviewByUserId(userId);
+        reviewRepo.deleteReviewByUserId(user.getUserId());
     }
     public List<Review> allReviews(){
         return reviewRepo.findAll();
